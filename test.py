@@ -210,6 +210,9 @@ class TestPhysical(unittest.TestCase):
         response = server_conn.receive(expectation, 100)
         self.assertEqual(self.big_message.to_dict(), response.to_dict())
 
+    def testUDPServer(self):
+        with self.assertRaisesRegex(RuntimeError, r'Could not bind to socket \(Cannot assign requested address\)'):
+            libmav.UDPServer(243183, '203.0.113.0')
 
 if __name__ == '__main__':
     unittest.main()
